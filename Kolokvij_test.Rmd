@@ -1,0 +1,34 @@
+---
+title: "Kolokvij_test"
+author: "jacob"
+date: "2018 M12 7"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#naloga 1
+```{r, echo=FALSE}
+library(ggplot2)
+g <- ggplot(data = airquality, aes(x = factor(Month),y = Ozone)) + geom_boxplot(outlier.colour = "red") + geom_point(colour="blue", size=2) + xlab("Month")
+g
+```
+
+
+#naloga 2: Povprecje ozona da se bodo videle razlike
+```{r, echo=FALSE}
+library(ggplot2)
+a <- airquality %>% select(Ozone,Month) %>% group_by(Month) %>% summarise(mean(Ozone,na.rm = T))
+g <- ggplot(data = a, aes(x = Month,y = `mean(Ozone, na.rm = T)`)) + geom_line() + xlab("Month")
+g
+```
+
+#naloga 3: Povprecje ozona da se bodo videle razlike, s bar chartom
+```{r, echo=FALSE}
+library(ggplot2)
+a <- airquality %>% select(Ozone,Month) %>% group_by(Month) %>% summarise(mean(Ozone,na.rm = T))
+g <- ggplot(data = a, aes(x = as.factor(Month),fill=factor(`mean(Ozone, na.rm = T)`))) + geom_bar() + xlab("Month")
+g
+```
